@@ -3,4 +3,4 @@
 Learning Swift and SwiftUI
 
 ## Game Interface
-![Screenshot of the App](/screenshot/screen.png)
+![Screenshot of the App](/screenshot/screen.png =150x)
