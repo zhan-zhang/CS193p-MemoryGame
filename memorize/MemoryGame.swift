@@ -12,6 +12,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
     var seenCardIndices: Set<Int> = []
     var score: Int = 0
+    var firstCardTime: Date? = nil
+    var SecondCardTime: Date? = nil
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get {
@@ -41,7 +43,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    score += 2
+                    score += calculateScore(start: firstCardTime!, end: Date())
+                    
                 } else {
                     if (seenCardIndices.contains(chosenIndex) || seenCardIndices.contains(potentialMatchIndex)) {
                         score -= 1
@@ -53,10 +56,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 for index in cards.indices {
                     cards[index].isFaceUp = false
                 }
+                firstCardTime = Date()
             }
             self.cards[chosenIndex].isFaceUp = true
         }
         print("Score: \(score)")
+    }
+    
+    func calculateScore(start startMatchTime: Date, end endMatchTime: Date) -> Int {
+        let elapsedSeconds = Int(endMatchTime.timeIntervalSince(startMatchTime))
+        return max(10 - elapsedSeconds * 2, 0)
     }
         
     struct Card: Identifiable {
