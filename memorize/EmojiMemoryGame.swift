@@ -20,7 +20,7 @@ class EmojiMemoryGame: ObservableObject {
         model = EmojiMemoryGame.createMemoryGame(with: nil)
     }
     
-    static func createMemoryGame(with themeOfGame: ThemeSelection?) -> GameWithTheme<MemoryGame<String>> {
+    private static func createMemoryGame(with themeOfGame: ThemeSelection?) -> GameWithTheme<MemoryGame<String>> {
         let themeOfGame = themeOfGame != nil ? themeOfGame!.getTheme() : ThemeSelection.getRandomTheme()
         let emojis = themeOfGame.emojis.shuffled()
         return

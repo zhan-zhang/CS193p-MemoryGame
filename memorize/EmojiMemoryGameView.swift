@@ -57,7 +57,7 @@ struct CardView: View {
         }
     }
     
-    func body(for size: CGSize) -> some View {
+    private func body(for size: CGSize) -> some View {
         let gradient = Gradient(colors: [startColor, .white])
 
         return ZStack{
@@ -79,9 +79,9 @@ struct CardView: View {
     
     // MARK: - Drawing Constants
     
-    let cornerRadius: CGFloat = 10
-    let edgeLineWidth: CGFloat = 2
-    let fontScaleFactor: CGFloat = 0.75
+    private let cornerRadius: CGFloat = 10
+    private let edgeLineWidth: CGFloat = 2
+    private let fontScaleFactor: CGFloat = 0.75
 }
 
 struct ContentView_Previews: PreviewProvider {

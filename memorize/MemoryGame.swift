@@ -9,13 +9,13 @@
 import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
-    var seenCardIndices: Set<Int> = []
-    var score: Int = 0
-    var firstCardTime: Date? = nil
-    var SecondCardTime: Date? = nil
+    private(set) var cards: Array<Card>
+    private var seenCardIndices: Set<Int> = []
+    private(set) var score: Int = 0
+    private var firstCardTime: Date? = nil
+    private var SecondCardTime: Date? = nil
     
-    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get {
             cards.indices.filter {cards[$0].isFaceUp}.only
         }
@@ -63,7 +63,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         print("Score: \(score)")
     }
     
-    func calculateScore(start startMatchTime: Date, end endMatchTime: Date) -> Int {
+    private func calculateScore(start startMatchTime: Date, end endMatchTime: Date) -> Int {
         let elapsedSeconds = Int(endMatchTime.timeIntervalSince(startMatchTime))
         return max(10 - elapsedSeconds * 2, 0)
     }
